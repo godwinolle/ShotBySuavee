@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { CldImage } from 'next-cloudinary';
+
 interface FilmPhoto {
     photo: string
     description: string

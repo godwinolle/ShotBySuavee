@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { CldImage } from "next-cloudinary";
+
 interface DigitalPhoto {
     photo: string
     description: string
@@ -18,7 +20,14 @@ export default function DigitalPhoto({ photo, description, width, height }: Digi
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="w-full"
             >
-                <Image
+                {/* <Image
+                    src={photo}
+                    alt={description}
+                    width={width}
+                    height={height}
+                    className="block w-full h-auto"
+                /> */}
+                <CldImage
                     src={photo}
                     alt={description}
                     width={width}

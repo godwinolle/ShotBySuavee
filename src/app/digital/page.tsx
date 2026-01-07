@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
 import Navigation from "../components/shared/Navigation";
@@ -14,8 +15,8 @@ interface PhotoData {
 
 const photos: PhotoData[] = [
     // Add your digital photos here
-    // { photo: '/digital/digital1.jpg', description: "shotbysuavee", width: 420, height: 200 },
     { photo: '/film/film1.jpg', description: "shotbysuavee", width: 420, height: 200 },
+    // { photo: 'https://res.cloudinary.com/dhkhxga0h/image/upload/v1767734929/film1_dk4hdr.jpg', description: "shotbysuavee", width: 420, height: 200 },
     { photo: '/film/film1.jpg', description: "shotbysuavee", width: 420, height: 200 },
     { photo: '/film/film1.jpg', description: "shotbysuavee", width: 420, height: 200 },
     { photo: '/film/film1.jpg', description: "shotbysuavee", width: 420, height: 200 },
@@ -51,6 +52,28 @@ const itemVariants = {
 };
 
 export default function Digital() {
+    const [digitalPhotos, setDigitalPhotos] = useState<PhotoData[]>([])
+
+    useEffect(() => {
+        const fetchPhoto = async () => {
+            try{
+                const response = await fetch('/api/photos?type=digital')
+                const data = await response.json()
+
+                const photos = await data.photos
+
+                console.log(photos)
+
+                setDigitalPhotos(photos)
+            } catch(error) {
+                console.error("Error retrieving digital photos", error)
+            }
+        }
+
+        fetchPhoto()
+    }, [])
+
+
     return (
         <div className="flex flex-col min-h-screen">
             <Navigation />
@@ -61,7 +84,7 @@ export default function Digital() {
                     initial="hidden"
                     animate="visible"
                 >
-                    {photos.map((photoData, index) => (
+                    {digitalPhotos.map((photoData, index) => (
                         <motion.div
                             key={`${photoData.photo}-${index}`}
                             variants={itemVariants}
