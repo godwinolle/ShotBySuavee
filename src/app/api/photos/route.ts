@@ -14,6 +14,7 @@ type PhotoData = {
     description: string;
     width: number;
     height: number;
+    url: string
 }
 
 export async function GET(req: NextRequest) {
@@ -31,18 +32,9 @@ export async function GET(req: NextRequest) {
 
     const result = await cloudinary.search
         .expression(`folder:${type}/*`)
-        // .sort_by([{ created_at: 'desc' }])
+        .sort_by('public_id', "desc")
         .max_results(100)
         .execute();
-
-    // const result = await cloudinary.api.resources({
-    //     type: 'upload',
-    //     resource_type: 'image',
-    //     prefix: `${type}/`,
-    //     max_results: 100
-    //   });
-
-    console.log("Result of this", result)
 
     // Map the results to your PhotoData format
     const photos: PhotoData[] = await result.resources.map((resource: any) => ({
@@ -50,7 +42,10 @@ export async function GET(req: NextRequest) {
         description: "shotbysuavee",
         width: resource.width,
         height: resource.height,
+        url: resource.url
     }));
+
+    // console.log("Result of this", result)
 
     const responseJSON: ResponseData = {
         success: true,
