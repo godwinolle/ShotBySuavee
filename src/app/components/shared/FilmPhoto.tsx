@@ -1,6 +1,5 @@
 'use client'
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 import { CldImage } from 'next-cloudinary';
 
@@ -9,22 +8,19 @@ interface FilmPhoto {
     description: string
     width: number
     height: number
-    filmRoll: string
+    filmRoll?: string
     url: string
-    // onLoad?: () => void
 }
-
-type Page = 'about' | 'photo'
 
 const cloudName: string = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME as string
 
 const config = {
-    cloud: { 
-        cloudName: cloudName 
+    cloud: {
+        cloudName: cloudName
     }
 }
 
-export default function FilmPhoto({ photo, description, width, height, filmRoll, url }: FilmPhoto) {
+export default function FilmPhoto({ description, width, height, filmRoll, url }: FilmPhoto) {
     const filmFont: string = 'text-[10px]'
     return (
         <div className="inline-block rounded-2xl overflow-hidden bg-black w-full">
@@ -35,15 +31,6 @@ export default function FilmPhoto({ photo, description, width, height, filmRoll,
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    {/* <Image
-                src={ photo }
-                alt={ description }
-                width={ width }
-                height={ height }
-                // onLoad={ onLoad }
-                className="block w-full h-auto"
-            /> */}
-
                     <CldImage
                         src={url}
                         alt={description}
@@ -53,7 +40,6 @@ export default function FilmPhoto({ photo, description, width, height, filmRoll,
                         loading="lazy"
                         quality="auto"
                         format="auto"
-                        // cloudName={cloudName}
                         className="block w-full h-auto"
                     />
                 </motion.div>

@@ -1,15 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { PhotoData } from "@/lib/cloudinaryHelpers";
 import DigitalPhoto from "../components/shared/DigitalPhoto";
-
-interface PhotoData {
-    photo: string;
-    description: string;
-    width: number;
-    height: number;
-    url: string;
-}
 
 interface PhotoGridInterface {
     photos: PhotoData[]
@@ -52,25 +45,25 @@ export default function PhotoGrid({ photos }: PhotoGridInterface) {
             animate="visible"
         >
             {photos.map((photoData, index) => (
-                // <motion.div
-                //     key={`${photoData.photo}-${index}`}
-                //     variants={itemVariants}
-                //     whileHover={{ 
-                //         scale: 1.02,
-                //         transition: { duration: 0.3 }
-                //     }}
-                //     className="cursor-pointer"
-                // >
-                <div key={`${photoData.photo}-${index}`}>
-                    <DigitalPhoto
-                        photo={photoData.photo}
-                        url={photoData.url}
-                        description={photoData.description}
-                        width={photoData.width}
-                        height={photoData.height}
-                    />
-                </div>
-                // </motion.div>
+                <motion.div
+                    key={`${photoData.photo}-${index}`}
+                    variants={itemVariants}
+                    whileHover={{
+                        scale: 1.02,
+                        transition: { duration: 0.3 }
+                    }}
+                    className="cursor-pointer"
+                >
+                    <div key={`${photoData.photo}-${index}`}>
+                        <DigitalPhoto
+                            photo={photoData.photo}
+                            url={photoData.url}
+                            description={photoData.description}
+                            width={photoData.width}
+                            height={photoData.height}
+                        />
+                    </div>
+                </motion.div>
             ))}
         </motion.div>
     )

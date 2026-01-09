@@ -9,8 +9,7 @@ export interface PhotoData {
     filmRoll?: string;
 }
 
-
-async function getPhotos(type: string) {
+async function getPhotos(type: string): Promise<PhotoData[]> {
     const result = await cloudinary.search
         .expression(`folder:${type}/*`)
         .with_field('context')
@@ -18,26 +17,14 @@ async function getPhotos(type: string) {
         .max_results(100)
         .execute();
 
-    if(type === "digital") {
-        return result.resources.map((resource: any) => ({
-            photo: resource.public_id, // Use public_id for CldImage
-            description: "shotbysuavee",
-            width: resource.width,
-            height: resource.height,
-            url: resource.url
-        }));
-    } else {
-        return result.resources.map((resource: any) => ({
-            photo: resource.public_id, // Use public_id for CldImage
-            description: "shotbysuavee",
-            width: resource.width,
-            height: resource.height,
-            url: resource.url,
-            filmRoll: resource.context?.filmRoll || ""
-        }));
-    }
-
-
+    return result.resources.map((resource: any): PhotoData => ({
+        photo: resource.public_id, // Use public_id for CldImage
+        description: "shotbysuavee",
+        width: resource.width,
+        height: resource.height,
+        url: resource.url,
+        ...(type !== "digital" && { filmRoll: resource.context?.filmRoll || ""  })
+    }));
 }
 
 export { getPhotos }

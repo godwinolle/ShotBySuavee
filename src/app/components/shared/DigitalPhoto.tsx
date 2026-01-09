@@ -1,7 +1,6 @@
 'use client'
-import { motion } from "framer-motion";
-import Image from "next/image";
 
+import { motion } from "framer-motion";
 import { CldImage } from "next-cloudinary";
 
 interface DigitalPhoto {
@@ -12,16 +11,15 @@ interface DigitalPhoto {
     url: string
 }
 
-
 const cloudName: string = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME as string
 
 const config = {
-    cloud: { 
-        cloudName: cloudName 
+    cloud: {
+        cloudName: cloudName
     }
 }
 
-export default function DigitalPhoto({ photo, description, width, height, url }: DigitalPhoto) {
+export default function DigitalPhoto({ description, width, height, url }: DigitalPhoto) {
     return (
         <div className="w-full overflow-hidden rounded-lg">
             <motion.div
@@ -30,13 +28,6 @@ export default function DigitalPhoto({ photo, description, width, height, url }:
                 transition={{ duration: 0.6, delay: 0.02 }}
                 className="w-full"
             >
-                {/* <Image
-                    src={photo}
-                    alt={description}
-                    width={width}
-                    height={height}
-                    className="block w-full h-auto"
-                /> */}
                 <CldImage
                     src={url}
                     alt={description}
@@ -46,7 +37,6 @@ export default function DigitalPhoto({ photo, description, width, height, url }:
                     loading="lazy"
                     quality="auto"
                     format="auto"
-                    // cloudName={cloudName}
                     className="block w-full h-auto"
                 />
             </motion.div>

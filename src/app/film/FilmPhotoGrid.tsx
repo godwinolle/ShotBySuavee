@@ -1,17 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { PhotoData } from "@/lib/cloudinaryHelpers";
+
 import FilmPhoto from "../components/shared/FilmPhoto";
-
-interface PhotoData {
-    photo: string;
-    description: string;
-    width: number;
-    height: number;
-    url: string;
-    filmRoll: string;
-}
-
 interface PhotoGridInterface {
     photos: PhotoData[]
 }
@@ -55,7 +47,7 @@ export default function FilmPhotoGrid({photos}: PhotoGridInterface) {
             {photos.map((photoData, index) => (
                 <motion.div
                     key={`${photoData.photo}-${index}`}
-                    // variants={itemVariants}
+                    variants={itemVariants}
                     whileHover={{
                         scale: 1.02,
                         transition: { duration: 0.3 }
