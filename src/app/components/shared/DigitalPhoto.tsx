@@ -20,6 +20,10 @@ const config = {
 }
 
 export default function DigitalPhoto({ description, width, height, url }: DigitalPhoto) {
+    const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="w-full overflow-hidden rounded-lg">
             <motion.div
@@ -37,6 +41,7 @@ export default function DigitalPhoto({ description, width, height, url }: Digita
                     loading="lazy"
                     quality="auto"
                     format="auto"
+                    onContextMenu={ handleContextMenu }
                     className="block w-full h-auto"
                 />
             </motion.div>

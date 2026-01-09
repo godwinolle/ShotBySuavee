@@ -1,6 +1,5 @@
 'use client'
 import { motion } from "framer-motion";
-
 import { CldImage } from 'next-cloudinary';
 
 interface FilmPhoto {
@@ -22,6 +21,11 @@ const config = {
 
 export default function FilmPhoto({ description, width, height, filmRoll, url }: FilmPhoto) {
     const filmFont: string = 'text-[10px]'
+
+    const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="inline-block rounded-2xl overflow-hidden bg-black w-full">
             <div className="grid grid-cols-[12px_1fr_12px] grid-rows-[10px_auto_10px]">
@@ -40,6 +44,7 @@ export default function FilmPhoto({ description, width, height, filmRoll, url }:
                         loading="lazy"
                         quality="auto"
                         format="auto"
+                        onContextMenu={ handleContextMenu }
                         className="block w-full h-auto"
                     />
                 </motion.div>

@@ -9,6 +9,17 @@ export interface PhotoData {
     filmRoll?: string;
 }
 
+interface CloudinaryResource {
+    public_id: string;
+    width: number;
+    height: number;
+    url: string;
+    context?: {
+        filmRoll?: string;
+        [key: string]: string | undefined;
+    };
+}
+
 async function getPhotos(type: string): Promise<PhotoData[]> {
     const result = await cloudinary.search
         .expression(`folder:${type}/*`)
@@ -17,7 +28,7 @@ async function getPhotos(type: string): Promise<PhotoData[]> {
         .max_results(100)
         .execute();
 
-    return result.resources.map((resource: any): PhotoData => ({
+    return result.resources.map((resource: CloudinaryResource): PhotoData => ({
         photo: resource.public_id, // Use public_id for CldImage
         description: "shotbysuavee",
         width: resource.width,
