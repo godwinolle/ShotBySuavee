@@ -10,8 +10,6 @@ export const revalidate = 60;
 export default async function Film() {
     const filmPhotoData = await getPhotos("film")
 
-    console.log(filmPhotoData)
-
     return (
         <div className="flex flex-col min-h-screen">
             <Navigation />
