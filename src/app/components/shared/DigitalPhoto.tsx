@@ -19,7 +19,7 @@ const config = {
     }
 }
 
-export default function DigitalPhoto({ description, width, height, url }: DigitalPhoto) {
+export default function DigitalPhoto({ photo, description, width, height }: DigitalPhoto) {
     const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
         e.preventDefault();
     };
@@ -33,7 +33,7 @@ export default function DigitalPhoto({ description, width, height, url }: Digita
                 className="w-full"
             >
                 <CldImage
-                    src={url}
+                    src={photo}
                     alt={description}
                     width={width}
                     height={height}

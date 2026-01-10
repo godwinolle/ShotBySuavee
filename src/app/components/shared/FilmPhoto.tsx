@@ -19,7 +19,7 @@ const config = {
     }
 }
 
-export default function FilmPhoto({ description, width, height, filmRoll, url }: FilmPhoto) {
+export default function FilmPhoto({ photo, description, width, height, filmRoll }: FilmPhoto) {
     const filmFont: string = 'text-[10px]'
 
     const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -36,7 +36,7 @@ export default function FilmPhoto({ description, width, height, filmRoll, url }:
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
                     <CldImage
-                        src={url}
+                        src={photo}
                         alt={description}
                         width={width}
                         height={height}

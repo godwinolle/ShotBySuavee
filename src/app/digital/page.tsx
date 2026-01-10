@@ -5,6 +5,9 @@ import PhotoGrid from "./PhotoGrid";
 
 import { getPhotos } from "@/lib/cloudinaryHelpers";
 
+// Revalidate every 60 seconds (you can adjust this)
+export const revalidate = 60;
+
 export default async function Digital() {
     const digitalPhotoData = await getPhotos("digital")
 
